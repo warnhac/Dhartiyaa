@@ -12,7 +12,7 @@ document.getElementById('year').textContent = new Date().getFullYear();
 // ---- Limited-time offer settings: change percent or end date/time here ----
 const OFFER = { percent: 30, endsAt: '2026-10-31T23:59:59+05:30' };
 // WhatsApp number that receives enquiries: country code + number, digits only (e.g. India 91XXXXXXXXXX).
-const WHATSAPP_NUMBER = '910000000000'; // PLACEHOLDER - replace with the brand's real WhatsApp number
+const WHATSAPP_NUMBER = '918802687562'; // PLACEHOLDER - replace with the brand's real WhatsApp number
 const waLink = text => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
 const offerEnd = new Date(OFFER.endsAt).getTime();
 const offerActive = () => Date.now() < offerEnd;
