@@ -378,3 +378,18 @@ body{overflow-x:clip}
 .hero-slider::before{inset:-14px;transform:none;border-radius:10px}
 .story-image::after{inset:-16px;transform:none}
 @media(max-width:640px){.hero-slider::before{inset:-10px}.story-image::after{inset:-10px}}
+
+
+/* Product cards: price on the left, Add to cart right beside it */
+.product-buy{display:flex!important;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding-top:16px}
+.product-buy>strong{grid-column:auto;flex:0 0 auto}
+.product-buy .add-cart{flex:1 1 138px;width:auto;max-width:100%;min-width:0;margin:0}
+@media(max-width:1200px){.product-buy{display:flex!important}}
+
+/* Keep price + Add to cart on one row: compact price, 3 cards per row on mid-size screens */
+.product-buy .price-unit{display:none}
+.product-buy .add-cart{flex:1 1 120px;padding:13px 10px;letter-spacing:1.2px}
+.product-buy>strong{font-size:26px}
+@media(max-width:1200px) and (min-width:641px){.product-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:900px) and (min-width:641px){.product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.product-buy{flex-direction:row!important;align-items:center!important}

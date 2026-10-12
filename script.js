@@ -12,7 +12,7 @@ document.getElementById('year').textContent = new Date().getFullYear();
 // ---- Limited-time offer settings: change percent or end date/time here ----
 const OFFER = { percent: 30, endsAt: '2026-10-31T23:59:59+05:30' };
 // WhatsApp number that receives enquiries: country code + number, digits only (e.g. India 91XXXXXXXXXX).
-const WHATSAPP_NUMBER = '918802687562'; // PLACEHOLDER - replace with the brand's real WhatsApp number
+const WHATSAPP_NUMBER = '918802687562'; // +91 88026 87562
 const waLink = text => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
 const offerEnd = new Date(OFFER.endsAt).getTime();
 const offerActive = () => Date.now() < offerEnd;
@@ -38,22 +38,6 @@ document.querySelectorAll('.product-card .size-btn').forEach(btn => btn.addEvent
   card.querySelectorAll('.size-btn').forEach(b => b.setAttribute('aria-pressed', String(b === btn)));
   renderCardPrice(card);
 }));
-
-// "Enquire now": opens WhatsApp with the product, pack size and price pre-filled
-function enquiryText(product) {
-  const size = selectedSize.get(product.id) || 1;
-  const variant = product.sizes.find(v => v.size === size) || product.sizes[0];
-  const on = offerActive();
-  const priceLine = on
-    ? `${formatINR(unitPrice(variant.price))} (${OFFER.percent}% limited-time offer, MRP ${formatINR(variant.price)})`
-    : formatINR(variant.price);
-  return `Hello Dhartiya Natural Foods, I would like to enquire about:\n\n*${product.name}* — ${variant.size} kg pack\nPrice shown: ${priceLine}\n\nPlease share availability, delivery details and how to order.`;
-}
-function updateEnquiryLink(card) {
-  const product = products.find(p => p.id === card.dataset.id);
-  const link = card.querySelector('.enquire-btn');
-  if (product && link) link.href = waLink(enquiryText(product));
-}
 
 /* ---------- Cart (orders are sent on WhatsApp) ---------- */
 const CART_KEY = 'dhartiya_cart';
@@ -419,7 +403,6 @@ function renderCardPrice(card) {
   let pill = card.querySelector('.offer-pill');
   if (!pill) { pill = document.createElement('span'); pill.className = 'offer-pill'; card.querySelector('.size-options').append(pill); }
   pill.textContent = `${OFFER.percent}% OFF`; pill.hidden = !on;
-  updateEnquiryLink(card);
 }
 const announcementBar = document.querySelector('.announcement');
 const announcementDefault = announcementBar.textContent;
